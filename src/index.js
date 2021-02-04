@@ -6,6 +6,7 @@ import Products from "./components/Products";
 import Footer from "./components/Footer";
 import QuickView from "./components/QuickView";
 import "./scss/style.scss";
+import productdata from "./productdata"
 
 class App extends Component {
   constructor() {
@@ -15,10 +16,12 @@ class App extends Component {
       cart: [],
       totalItems: 0,
       totalAmount: 0,
+	  totalBaseProfit: 0,
       term: "",
       category: "",
       cartBounce: false,
       quantity: 1,
+	  profit: 0,
       quickViewProduct: {},
       modalActive: false
     };
@@ -28,6 +31,7 @@ class App extends Component {
     this.handleAddToCart = this.handleAddToCart.bind(this);
     this.sumTotalItems = this.sumTotalItems.bind(this);
     this.sumTotalAmount = this.sumTotalAmount.bind(this);
+	this.sumBaseProfit = this.sumBaseProfit.bind(this);
     this.checkProduct = this.checkProduct.bind(this);
     this.updateQuantity = this.updateQuantity.bind(this);
     this.handleRemoveProduct = this.handleRemoveProduct.bind(this);
@@ -36,13 +40,10 @@ class App extends Component {
   }
   // Fetch Initial Set of Products from external API
   getProducts() {
-    let url =
-      "https://res.cloudinary.com/sivadass/raw/upload/v1535817394/json/products.json";
-    axios.get(url).then(response => {
       this.setState({
-        products: response.data
+        products: productdata
       });
-    });
+
   }
   componentWillMount() {
     this.getProducts();
@@ -94,6 +95,7 @@ class App extends Component {
     );
     this.sumTotalItems(this.state.cart);
     this.sumTotalAmount(this.state.cart);
+	this.sumBaseProfit(this.state.cart);
   }
   handleRemoveProduct(id, e) {
     let cart = this.state.cart;
@@ -104,6 +106,7 @@ class App extends Component {
     });
     this.sumTotalItems(this.state.cart);
     this.sumTotalAmount(this.state.cart);
+	this.sumBaseProfit(this.state.cart);
     e.preventDefault();
   }
   checkProduct(productID) {
@@ -128,6 +131,16 @@ class App extends Component {
     }
     this.setState({
       totalAmount: total
+    });
+  }
+  sumBaseProfit() {
+    let total = 0;
+    let cart = this.state.cart;
+    for (var i = 0; i < cart.length; i++) {
+      total += cart[i].profit * parseInt(cart[i].quantity);
+    }
+    this.setState({
+      totalBaseprofit: total
     });
   }
 

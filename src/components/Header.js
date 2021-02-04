@@ -76,12 +76,14 @@ class Header extends Component {
           <div className="product-info">
             <p className="product-name">{product.name}</p>
             <p className="product-price">{product.price}</p>
+			<p className="product-price">{product.profit}</p>
           </div>
           <div className="product-total">
             <p className="quantity">
               {product.quantity} {product.quantity > 1 ? "Nos." : "No."}{" "}
             </p>
             <p className="amount">{product.quantity * product.price}</p>
+			<p className="amount">{product.quantity * product.profit}</p>
           </div>
           <a
             className="product-remove"
@@ -175,10 +177,17 @@ class Header extends Component {
                     </td>
                   </tr>
                   <tr>
-                    <td>Sub Total</td>
+                    <td>Total Cost</td>
                     <td>:</td>
                     <td>
                       <strong>{this.props.total}</strong>
+                    </td>
+                  </tr>
+				   <tr>
+                    <td>Total Base Profit</td>
+                    <td>:</td>
+                    <td>
+                      <strong>{this.props.totalBaseProfit}</strong>
                     </td>
                   </tr>
                 </tbody>

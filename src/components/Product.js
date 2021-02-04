@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Counter from "./Counter";
+import coin from "./goldcoin.png";
 
 class Product extends Component {
   constructor(props) {
@@ -10,13 +11,14 @@ class Product extends Component {
       isAdded: false
     };
   }
-  addToCart(image, name, price, id, quantity) {
+  addToCart(image, name, price, profit, id, quantity) {
     this.setState(
       {
         selectedProduct: {
           image: image,
           name: name,
           price: price,
+		  profit: profit,
           id: id,
           quantity: quantity
         }
@@ -39,12 +41,13 @@ class Product extends Component {
       }
     );
   }
-  quickView(image, name, price, id) {
+  quickView(image, name, price, profit, id) {
     this.setState(
       {
         quickViewProduct: {
           image: image,
           name: name,
+		  profit: profit,
           price: price,
           id: id
         }
@@ -58,6 +61,7 @@ class Product extends Component {
     let image = this.props.image;
     let name = this.props.name;
     let price = this.props.price;
+	let profit = this.props.profit;
     let id = this.props.id;
     let quantity = this.props.productQuantity;
     return (
@@ -71,13 +75,14 @@ class Product extends Component {
               image,
               name,
               price,
+			  profit,
               id,
               quantity
             )}
           />
         </div>
         <h4 className="product-name">{this.props.name}</h4>
-        <p className="product-price">{this.props.price}</p>
+        <p className="product-price"> {this.props.price}</p>
         <Counter
           productQuantity={quantity}
           updateQuantity={this.props.updateQuantity}
@@ -92,6 +97,7 @@ class Product extends Component {
               image,
               name,
               price,
+			  profit,
               id,
               quantity
             )}
