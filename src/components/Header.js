@@ -117,8 +117,8 @@ class Header extends Component {
           <div className="brand">
             <img
               className="logo"
-              src="https://res.cloudinary.com/sivadass/image/upload/v1493547373/dummy-logo/Veggy.png"
-              alt="Veggy Brand Logo"
+              src="https://stardewvalley.net/wp-content/uploads/2017/12/main_logo.png"
+              alt="SDV Logo"
             />
           </div>
 

@@ -25,6 +25,7 @@ class Products extends Component {
           <Product
             key={product.id}
             price={product.price}
+			profit={product.profit}
             name={product.name}
             image={product.image}
             id={product.id}
